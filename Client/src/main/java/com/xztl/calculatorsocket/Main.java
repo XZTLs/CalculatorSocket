@@ -1,6 +1,4 @@
-package com.xztl.socketone;
-
-import main.java.com.xztl.socketone.ClientEcho;
+package com.xztl.calculatorsocket;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package main.java.com.xztl.socketone;
+package com.xztl.calculatorsocket;
 
 import java.io.BufferedReader;
 import java.io.IOException;
