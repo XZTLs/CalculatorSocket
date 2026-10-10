@@ -11,12 +11,13 @@ public class CalculatorServer {
 
     public CalculatorServer(int port) {
 
-        // Apro una ServerSocket dentro le parentesi per farla chiudere
-        // in automatico alla fine del blocco try-catch
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
-            System.out.println("Server started on port: " + port);
+        while (true) {
 
-            while (true) {
+            // Apro una ServerSocket dentro le parentesi per farla chiudere
+            // in automatico alla fine del blocco try-catch
+            try (ServerSocket serverSocket = new ServerSocket(port)) {
+                System.out.println("Server started on port: " + port);
+
 
                 // Aspetto la connessione del client
                 Socket client = serverSocket.accept();
@@ -32,9 +33,9 @@ public class CalculatorServer {
 
                 System.out.println("Expression received: " + exp);
 
-                // Calcolo il risultato
                 try {
 
+                    // Calcolo il risultato
                     Double result = calculateExpression(exp);
 
                     // Mando un messaggio al Client
@@ -44,10 +45,10 @@ public class CalculatorServer {
                     out.println(e.getMessage());
                 }
 
-            }
 
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
     }
