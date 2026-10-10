@@ -8,6 +8,6 @@ public class Main {
 
         System.out.println("Client Started");
 
-        ClientEcho c = new ClientEcho("localhost", PORT);
+        CalculatorClient c = new CalculatorClient("localhost", PORT);
     }
 }

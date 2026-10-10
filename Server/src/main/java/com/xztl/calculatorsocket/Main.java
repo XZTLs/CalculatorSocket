@@ -8,6 +8,6 @@ public class Main {
 
         System.out.println("Server Started");
 
-        ServerEcho s = new ServerEcho(PORT);
+        CalculatorServer s = new CalculatorServer(PORT);
     }
 }
