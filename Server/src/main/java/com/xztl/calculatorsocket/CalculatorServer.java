@@ -15,31 +15,35 @@ public class CalculatorServer {
         // in automatico alla fine del blocco try-catch
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Server started on port: " + port);
-            
-            // Aspetto la connessione del client
-            Socket client = serverSocket.accept();
-            
-            // Necessario per leggere stringhe
-            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            
-            // Necessario per scrivere stringhe
-            PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 
-            // Aspetto un messaggio dal Client
-            String exp = in.readLine();
+            while (true) {
 
-            System.out.println("Expression received: " + exp);
+                // Aspetto la connessione del client
+                Socket client = serverSocket.accept();
 
-            // Calcolo il risultato
-            try {
+                // Necessario per leggere stringhe
+                BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-                Double result = calculateExpression(exp);
+                // Necessario per scrivere stringhe
+                PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 
-                // Mando un messaggio al Client
-                out.println(result);
+                // Aspetto un messaggio dal Client
+                String exp = in.readLine();
 
-            } catch (ArithmeticException e) {
-                out.println(e.getMessage());
+                System.out.println("Expression received: " + exp);
+
+                // Calcolo il risultato
+                try {
+
+                    Double result = calculateExpression(exp);
+
+                    // Mando un messaggio al Client
+                    out.println(result);
+
+                } catch (ArithmeticException e) {
+                    out.println(e.getMessage());
+                }
+
             }
 
         } catch (IOException e) {
@@ -49,11 +53,13 @@ public class CalculatorServer {
     }
 
     public double calculateExpression(String exp) throws ArithmeticException {
+        // Divido la stringa per gli spazi
         String[] l = exp.split(" ");
         double num1 = Double.parseDouble(l[0]);
         String operator = l[1];
         double num2 = Double.parseDouble(l[2]);
 
+        // Uso uno switch per capire l'operatore
         return switch (operator) {
             case "+" -> num1 + num2;
             case "-" -> num1 - num2;
