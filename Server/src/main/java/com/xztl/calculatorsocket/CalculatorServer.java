@@ -24,6 +24,7 @@ public class CalculatorServer {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Connected client: " + clientSocket.getInetAddress());
 
+                // Creo l'oggetto che mi va a gestire il client
                 ClientHandler client = new ClientHandler(clientSocket);
 
                 // Mando l'oggetto del client all'Executor Service
