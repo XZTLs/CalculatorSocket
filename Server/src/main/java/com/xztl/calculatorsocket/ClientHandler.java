@@ -53,9 +53,10 @@ public class ClientHandler implements Runnable {
                 // Mando un messaggio al Client
                 out.println(result);
 
-            } catch (ArithmeticException e) {
+            } catch (Exception e) {
                 out.println(e.getMessage());
             }
+            
         } catch (Exception e) {
             System.out.println(e);
         }
