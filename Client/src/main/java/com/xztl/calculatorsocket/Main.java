@@ -6,8 +6,11 @@ public class Main {
         // Porta del Server
         final int PORT = 5000;
 
+        // Ip del server
+        final String IP = "localhost";
+
         System.out.println("Client Started");
 
-        CalculatorClient c = new CalculatorClient("localhost", PORT);
+        CalculatorClient c = new CalculatorClient(IP, PORT);
     }
 }
