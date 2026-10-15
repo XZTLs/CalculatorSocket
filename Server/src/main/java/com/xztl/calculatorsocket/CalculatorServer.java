@@ -3,12 +3,16 @@ package com.xztl.calculatorsocket;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CalculatorServer {
 
-    public CalculatorServer(int port) {
+    public CalculatorServer(int port, int maxClient) {
 
         System.out.println("Server started on port: " + port);
+
+        ExecutorService exec = Executors.newFixedThreadPool(maxClient);
 
         while (true) {
 
@@ -21,11 +25,14 @@ public class CalculatorServer {
                 System.out.println("Connected client: " + clientSocket.getInetAddress());
 
                 ClientHandler client = new ClientHandler(clientSocket);
-                new Thread(client).start();
+
+                // Mando l'oggetto del client all'Executor Service
+                exec.submit(client);
 
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+
         }
 
     }
