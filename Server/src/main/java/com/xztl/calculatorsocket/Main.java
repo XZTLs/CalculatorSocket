@@ -11,6 +11,6 @@ public class Main {
 
         System.out.println("Server Started");
 
-        CalculatorServer s = new CalculatorServer(PORT, MAX_CLIENTS);
+        new CalculatorServer(PORT, MAX_CLIENTS);
     }
 }

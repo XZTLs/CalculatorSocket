@@ -11,6 +11,6 @@ public class Main {
 
         System.out.println("Client Started");
 
-        CalculatorClient c = new CalculatorClient(IP, PORT);
+        new CalculatorClient(IP, PORT);
     }
 }
