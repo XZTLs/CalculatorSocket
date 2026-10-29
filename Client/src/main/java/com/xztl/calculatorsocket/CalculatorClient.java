@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CalculatorClient {
@@ -27,14 +28,17 @@ public class CalculatorClient {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             // Leggo il primo numero dalla console
-            String num1 = scanner.nextLine().toLowerCase().trim();
+            System.out.print("First number: ");
+            String num1 = takeNumber(scanner);
 
             // Leggo l'operatore dalla console
-            String operator = scanner.nextLine().toLowerCase().trim();
+            System.out.print("Operand: ");
+            String operator = takeOperand(scanner);
 
             // Leggo il secondo numero dalla console
-            String num2 = scanner.nextLine().toLowerCase().trim();
-    
+            System.out.print("Second number: ");
+            String num2 = takeNumber(scanner);
+
             // Mando l'espressione al Server
             out.println(String.format("%s %s %s", num1, operator, num2));
 
@@ -46,6 +50,40 @@ public class CalculatorClient {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private String takeNumber(Scanner s) {
+        String num = "";
+        do {
+
+            num = s.nextLine().toLowerCase().trim();
+
+            // Controllo se la stringa inserita è un numero
+            try { Double.parseDouble(num); } catch(NumberFormatException e) {
+                System.out.println(num + " isn't a number");
+                num = ""; 
+            }
+
+        } while (num.equals(""));
+        return num;
+    }
+
+    private String takeOperand(Scanner s) {
+        String[] accepted = new String[] {"+", "-", "*", "/"};
+
+        String op = "";
+        do {
+
+            op = s.nextLine().toLowerCase().trim();
+
+            // Controllo se la stringa inserita è negli operatori consentiti
+            if (!Arrays.asList(accepted).contains(op)) {
+                System.out.println(op + " is not an operand");
+                op = "";
+            }
+
+        } while (op.equals(""));
+        return op;
     }
 
 }
