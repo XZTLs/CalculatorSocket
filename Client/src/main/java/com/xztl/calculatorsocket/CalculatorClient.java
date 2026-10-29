@@ -10,13 +10,15 @@ import java.util.Scanner;
 public class CalculatorClient {
     
     public CalculatorClient(String ip, int port) {
-
-        // Necessario per leggere l'input
-        Scanner scanner = new Scanner(System.in);
-
+        
         // Apro una Socket dentro le parentesi per farla chiudere
         // in automatico alla fine del blocco try-catch
-        try (Socket socket = new Socket(ip, port)) {
+        try (
+            Socket socket = new Socket(ip, port);
+            
+            // Necessario per leggere l'input
+            Scanner scanner = new Scanner(System.in);
+        ){
             
             // Necessario per leggere stringhe
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
